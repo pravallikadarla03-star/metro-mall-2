@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metro Mall - Store Directory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0,0,0,0.2);
+            padding: 0.5rem 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Filter Section */
+        .filters {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .filters h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            background: #ecf0f1;
+            border: 2px solid #bdc3c7;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Search Bar */
+        .search-box {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #ecf0f1;
+            border-radius: 25px;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Stores Grid */
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .store-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .store-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .store-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .store-info {
+            padding: 1.5rem;
+        }
+
+        .store-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .store-info h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .store-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .store-details {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .floor-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #667eea;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .store-hours {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+        }
+
+        @media (max-width: 768px) {
+            .header-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .page-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <h1>🏢 METRO MALL</h1>
+            </div>
+            <div class="header-info">
+                <div>📞 Call: (123) 456-7890</div>
+                <div>🕒 Open: 10 AM - 10 PM</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="stores.html">Stores</a></li>
+                <li><a href="dining.html">Dining</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h2>Store Directory</h2>
+        <p>Explore 200+ premium stores across all categories</p>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 Search for stores...">
+            </div>
+            <h3>Filter by Category</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">All Stores</button>
+                <button class="filter-btn" data-category="fashion">Fashion</button>
+                <button class="filter-btn" data-category="electronics">Electronics</button>
+                <button class="filter-btn" data-category="beauty">Beauty & Cosmetics</button>
+                <button class="filter-btn" data-category="home">Home & Decor</button>
+                <button class="filter-btn" data-category="sports">Sports & Fitness</button>
+                <button class="filter-btn" data-category="kids">Kids & Toys</button>
+                <button class="filter-btn" data-category="books">Books & Stationery</button>
+            </div>
+        </div>
+
+        <div class="stores-grid" id="storesContainer">
+            <!-- Stores will be loaded here dynamically -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Metro Mall</h3>
+                <p>Metro Mall is the premier shopping destination, offering an unparalleled retail experience with world-class brands and entertainment.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="stores.html">Store Directory</a></li>
+                    <li><a href="dining.html">Dining Options</a></li>
+                    <li><a href="events.html">Upcoming Events</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li>📍 123 Shopping Street, Metro City</li>
+                    <li>📞 (123) 456-7890</li>
+                    <li>✉️ info@metromall.com</li>
+                    <li>🕒 Mon-Sun: 10 AM - 10 PM</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Metro Mall. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Store data
+        const stores = [
+            {name: 'Fashion Avenue', category: 'fashion', floor: 2, icon: '👔', desc: 'Premium clothing and accessories for men and women'},
+            {name: 'Tech Hub', category: 'electronics', floor: 3, icon: '💻', desc: 'Latest gadgets, smartphones, and electronics'},
+            {name: 'Beauty Palace', category: 'beauty', floor: 1, icon: '💄', desc: 'Cosmetics, skincare, and beauty products'},
+            {name: 'Home Decor Studio', category: 'home', floor: 4, icon: '🏠', desc: 'Furniture, furnishings, and home accessories'},
+            {name: 'Sports World', category: 'sports', floor: 3, icon: '⚽', desc: 'Athletic wear, equipment, and fitness gear'},
+            {name: 'Kids Paradise', category: 'kids', floor: 2, icon: '🧸', desc: 'Toys, games, and children\'s clothing'},
+            {name: 'Book Haven', category: 'books', floor: 1, icon: '📚', desc: 'Books, magazines, and stationery items'},
+            {name: 'Trendy Boutique', category: 'fashion', floor: 2, icon: '👗', desc: 'Designer fashion and haute couture'},
+            {name: 'Gadget Galaxy', category: 'electronics', floor: 3, icon: '📱', desc: 'Mobile phones and accessories'},
+            {name: 'Glam Studio', category: 'beauty', floor: 1, icon: '💅', desc: 'Professional beauty and salon products'},
+            {name: 'Living Spaces', category: 'home', floor: 4, icon: '🛋️', desc: 'Modern furniture and interior design'},
+            {name: 'Fit Zone', category: 'sports', floor: 3, icon: '🏋️', desc: 'Gym equipment and nutrition supplements'},
+            {name: 'Toy Kingdom', category: 'kids', floor: 2, icon: '🎮', desc: 'Educational toys and video games'},
+            {name: 'Stationery Plus', category: 'books', floor: 1, icon: '✏️', desc: 'Office supplies and art materials'},
+            {name: 'Shoe Emporium', category: 'fashion', floor: 2, icon: '👟', desc: 'Footwear for all occasions'},
+            {name: 'Camera Corner', category: 'electronics', floor: 3, icon: '📷', desc: 'Professional cameras and photography gear'},
+            {name: 'Fragrance House', category: 'beauty', floor: 1, icon: '🌸', desc: 'Perfumes and fragrances'},
+            {name: 'Kitchen World', category: 'home', floor: 4, icon: '🍳', desc: 'Cookware and kitchen appliances'},
+            {name: 'Cycle Shop', category: 'sports', floor: 3, icon: '🚴', desc: 'Bicycles and cycling accessories'},
+            {name: 'Baby Store', category: 'kids', floor: 2, icon: '👶', desc: 'Baby products and infant care'}
+        ];
+
+        let currentFilter = 'all';
+        let searchTerm = '';
+
+        function displayStores() {
+            const container = document.getElementById('storesContainer');
+            let filteredStores = stores;
+
+            // Filter by category
+            if (currentFilter !== 'all') {
+                filteredStores = filteredStores.filter(store => store.category === currentFilter);
+            }
+
+            // Filter by search term
+            if (searchTerm) {
+                filteredStores = filteredStores.filter(store => 
+                    store.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    store.desc.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+
+            container.innerHTML = filteredStores.map(store => `
+                <div class="store-card">
+                    <div class="store-image">${store.icon}</div>
+                    <div class="store-info">
+                        <span class="store-category">${store.category}</span>
+                        <h3>${store.name}</h3>
+                        <p>${store.desc}</p>
+                        <div class="store-details">
+                            <span class="floor-tag">Floor ${store.floor}</span>
+                            <span class="store-hours">⏰ Open Now</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (filteredStores.length === 0) {
+                container.innerHTML = '<p style="text-align: center; font-size: 1.2rem; color: #666; grid-column: 1/-1;">No stores found matching your criteria.</p>';
+            }
+        }
+
+        // Filter button functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.category;
+                displayStores();
+            });
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            searchTerm = e.target.value;
+            displayStores();
+        });
+
+        // Initialize
+        displayStores();
+    </script>
+</body>
+</html>

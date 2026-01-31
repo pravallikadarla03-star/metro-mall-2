@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metro Mall - Dining</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0,0,0,0.2);
+            padding: 0.5rem 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .filters h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            background: #ecf0f1;
+            border: 2px solid #bdc3c7;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #ff6b6b;
+            color: white;
+            border-color: #ff6b6b;
+        }
+
+        /* Restaurants Grid */
+        .restaurants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .restaurant-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .restaurant-image {
+            height: 220px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+        }
+
+        .restaurant-info {
+            padding: 1.5rem;
+        }
+
+        .cuisine-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #667eea;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .restaurant-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .restaurant-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .restaurant-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .price-range {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .rating {
+            color: #f39c12;
+            font-size: 1.1rem;
+        }
+
+        .floor-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+        }
+
+        @media (max-width: 768px) {
+            .header-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .page-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <h1>🏢 METRO MALL</h1>
+            </div>
+            <div class="header-info">
+                <div>📞 Call: (123) 456-7890</div>
+                <div>🕒 Open: 10 AM - 10 PM</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="stores.html">Stores</a></li>
+                <li><a href="dining.html">Dining</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h2>Dining at Metro Mall</h2>
+        <p>Savor culinary delights from around the world</p>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            <h3>Filter by Cuisine</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-cuisine="all">All Cuisines</button>
+                <button class="filter-btn" data-cuisine="italian">Italian</button>
+                <button class="filter-btn" data-cuisine="chinese">Chinese</button>
+                <button class="filter-btn" data-cuisine="indian">Indian</button>
+                <button class="filter-btn" data-cuisine="american">American</button>
+                <button class="filter-btn" data-cuisine="japanese">Japanese</button>
+                <button class="filter-btn" data-cuisine="mexican">Mexican</button>
+                <button class="filter-btn" data-cuisine="cafe">Café & Desserts</button>
+            </div>
+        </div>
+
+        <div class="restaurants-grid" id="restaurantsContainer">
+            <!-- Restaurants will be loaded here -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Metro Mall</h3>
+                <p>Metro Mall is the premier shopping destination, offering an unparalleled retail experience with world-class brands and entertainment.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="stores.html">Store Directory</a></li>
+                    <li><a href="dining.html">Dining Options</a></li>
+                    <li><a href="events.html">Upcoming Events</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li>📍 123 Shopping Street, Metro City</li>
+                    <li>📞 (123) 456-7890</li>
+                    <li>✉️ info@metromall.com</li>
+                    <li>🕒 Mon-Sun: 10 AM - 10 PM</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Metro Mall. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Restaurant data
+        const restaurants = [
+            {name: 'Pasta Paradise', cuisine: 'italian', floor: 5, icon: '🍝', desc: 'Authentic Italian pasta and pizza', price: '$$', rating: 4.5},
+            {name: 'Dragon Wok', cuisine: 'chinese', floor: 5, icon: '🥢', desc: 'Traditional Chinese cuisine with modern twist', price: '$$', rating: 4.3},
+            {name: 'Spice Garden', cuisine: 'indian', floor: 5, icon: '🍛', desc: 'Aromatic Indian curries and tandoori', price: '$$$', rating: 4.7},
+            {name: 'Burger Junction', cuisine: 'american', floor: 5, icon: '🍔', desc: 'Gourmet burgers and fries', price: '$', rating: 4.2},
+            {name: 'Sushi Station', cuisine: 'japanese', floor: 5, icon: '🍣', desc: 'Fresh sushi and Japanese delicacies', price: '$$$', rating: 4.6},
+            {name: 'Taco Fiesta', cuisine: 'mexican', floor: 5, icon: '🌮', desc: 'Vibrant Mexican flavors and tacos', price: '$', rating: 4.4},
+            {name: 'Café Mocha', cuisine: 'cafe', floor: 1, icon: '☕', desc: 'Premium coffee and pastries', price: '$', rating: 4.5},
+            {name: 'Pizza Palace', cuisine: 'italian', floor: 5, icon: '🍕', desc: 'Wood-fired artisan pizzas', price: '$$', rating: 4.8},
+            {name: 'Noodle House', cuisine: 'chinese', floor: 5, icon: '🍜', desc: 'Hand-pulled noodles and dumplings', price: '$', rating: 4.1},
+            {name: 'Curry House', cuisine: 'indian', floor: 5, icon: '🍲', desc: 'Regional Indian specialties', price: '$$', rating: 4.4},
+            {name: 'Steakhouse Grill', cuisine: 'american', floor: 5, icon: '🥩', desc: 'Premium steaks and grills', price: '$$$', rating: 4.7},
+            {name: 'Ramen Bar', cuisine: 'japanese', floor: 5, icon: '🍥', desc: 'Authentic Japanese ramen', price: '$$', rating: 4.6},
+            {name: 'Burrito Bowl', cuisine: 'mexican', floor: 5, icon: '🌯', desc: 'Fresh and healthy Mexican bowls', price: '$', rating: 4.3},
+            {name: 'Sweet Treats', cuisine: 'cafe', floor: 2, icon: '🍰', desc: 'Desserts, cakes, and ice cream', price: '$', rating: 4.5},
+            {name: 'Mediterranean Mezze', cuisine: 'italian', floor: 5, icon: '🥗', desc: 'Fresh Mediterranean dishes', price: '$$', rating: 4.4}
+        ];
+
+        let currentCuisine = 'all';
+
+        function displayRestaurants() {
+            const container = document.getElementById('restaurantsContainer');
+            let filteredRestaurants = restaurants;
+
+            if (currentCuisine !== 'all') {
+                filteredRestaurants = filteredRestaurants.filter(r => r.cuisine === currentCuisine);
+            }
+
+            container.innerHTML = filteredRestaurants.map(restaurant => `
+                <div class="restaurant-card">
+                    <div class="restaurant-image">${restaurant.icon}</div>
+                    <div class="restaurant-info">
+                        <span class="cuisine-tag">${restaurant.cuisine}</span>
+                        <h3>${restaurant.name}</h3>
+                        <p>${restaurant.desc}</p>
+                        <div class="restaurant-details">
+                            <span class="price-range">${restaurant.price}</span>
+                            <span class="rating">⭐ ${restaurant.rating}</span>
+                        </div>
+                        <span class="floor-tag">Floor ${restaurant.floor}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            if (filteredRestaurants.length === 0) {
+                container.innerHTML = '<p style="text-align: center; font-size: 1.2rem; color: #666; grid-column: 1/-1;">No restaurants found in this category.</p>';
+            }
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentCuisine = this.dataset.cuisine;
+                displayRestaurants();
+            });
+        });
+
+        // Initialize
+        displayRestaurants();
+    </script>
+</body>
+</html>
